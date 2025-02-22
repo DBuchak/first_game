@@ -47,16 +47,30 @@
     <script>
         const canvas = document.getElementById("myCanvas");
         const ctx = canvas.getContext("2d");
+        const ballRadius = 10;
+        const colors = [
+        "#FF5733", "#33FF57", "#3357FF", "#FFD700", "#FF1493", "#8A2BE2", 
+        "#00FFFF", "#FF4500", "#32CD32", "#DC143C", "#FF8C00", "#00FA9A", 
+        "#4169E1", "#FF00FF", "#8B0000", "#20B2AA", "#9400D3", "#FF6347", 
+        "#00BFFF", "#7FFF00", "#4B0082", "#8FBC8F", "#A52A2A", "#FF69B4", 
+        "#5F9EA0", "#6A5ACD"
+        ];
+    
 
         let x = canvas.width / 2;
         let y = canvas.height -30;
         let dx = 2;
         let dy = -2;
+        let ballColor = "#0095DD";
+
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
 
         function drawBall() {
             ctx.beginPath();
-            ctx.arc(x, y, 10, 0, Math.PI * 2);
-            ctx.fillStyle = "#0095DD";
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = ballColor;
             ctx.fill();
             ctx.closePath();
           }
@@ -64,6 +78,16 @@
           function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBall();
+
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+                ballColor = getRandomColor();
+            }
+            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+                dy = -dy;
+                ballColor = getRandomColor();
+            }
+              
             x += dx;
             y += dy;
           }
