@@ -15,7 +15,6 @@
         margin: 0 auto;
       }
       button {
-        display: block;
         position: absolute;
         top: 330px;
         left: 513px;
@@ -23,7 +22,20 @@
         height: 100px;
         font-size: 34px;
         background-color: #0095DD;
-        border-radius: 10px;;
+        border-radius: 10px;
+        transition: 0.4s;
+        border: none;
+        box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      button:hover {
+        background-color: blue;
+        color: white;
+      }
+
+      button:active {
+        transform: scale(0.95);
+        box-shadow: none;
       }
     </style>
   </head>
