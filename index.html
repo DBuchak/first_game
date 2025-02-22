@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Gamedev Canvas Workshop</title>
+    <button id="runButton">Start Game</button>
     <style>
       * {
         padding: 0;
@@ -12,6 +13,17 @@
         background: #b0b0b0;
         display: block;
         margin: 0 auto;
+      }
+      button {
+        display: block;
+        position: absolute;
+        top: 330px;
+        left: 513px;
+        width: 486px;
+        height: 100px;
+        font-size: 34px;
+        background-color: #0095DD;
+        border-radius: 10px;;
       }
     </style>
   </head>
@@ -24,25 +36,34 @@
         const canvas = document.getElementById("myCanvas");
         const ctx = canvas.getContext("2d");
 
-        ctx.beginPath();
-        ctx.rect(215, 90, 50, 50);
-        ctx.fillStyle = "#000000";
-        ctx.fill();
-        ctx.closePath();
-        ctx.beginPath();
+        let x = canvas.width / 2;
+        let y = canvas.height -30;
+        let dx = 2;
+        let dy = -2;
 
-        ctx.arc(240, 160, 20, 0, Math.PI * 2, false);
-        ctx.fillStyle = "red";
-        ctx.fill();
-        ctx.closePath();
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, Math.PI * 2);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+          }
 
-        ctx.beginPath();
-        ctx.rect(190, 140, 100, 40);
-        ctx.strokeStyle = "rgb(0 0 255 / 50%)";
-        ctx.stroke();
-        ctx.closePath();
+          function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+            x += dx;
+            y += dy;
+          }
+          
+          function startGame() {
+            setInterval(draw, 10);
+          }
 
-
+          document.getElementById("runButton").addEventListener("click", function() {
+            startGame();
+            this.display = true;
+          });
     </script>
   </body>
 </html>
